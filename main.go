@@ -1,10 +1,10 @@
 package main
 
 import (
-	"fmt"
 	"os"
 
 	"github.com/ArterOhm/back-end-project-restAPI/config"
+	"github.com/ArterOhm/back-end-project-restAPI/modules/servers"
 	"github.com/ArterOhm/back-end-project-restAPI/pkg/database"
 )
 
@@ -21,7 +21,6 @@ func main() {
 
 	db := database.DbConnect(cfg.Db())
 	defer db.Close()
-	fmt.Println(cfg.Db().Url())
 
-	fmt.Println(db)
+	servers.NewServer(cfg, db).Start()
 }
