@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/ArterOhm/back-end-project-restAPI/config"
+	"github.com/ArterOhm/back-end-project-restAPI/pkg/database"
 )
 
 func envPath() string {
@@ -17,5 +18,10 @@ func envPath() string {
 
 func main() {
 	cfg := config.LoadConfig(envPath())
-	fmt.Println(cfg)
+
+	db := database.DbConnect(cfg.Db())
+	defer db.Close()
+	fmt.Println(cfg.Db().Url())
+
+	fmt.Println(db)
 }
