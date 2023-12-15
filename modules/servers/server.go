@@ -46,6 +46,7 @@ func (s *server) Start() {
 	v1 := s.app.Group(("v1"))
 	modules := InitModule(v1, s, middlewares)
 	modules.MonitorModule()
+	modules.UsersModule()
 
 	s.app.Use(middlewares.RouterCheck())
 
